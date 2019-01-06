@@ -1,0 +1,16 @@
+Varsfile.txt
+This file is for tracking the names of variables
+
+username = name user as elected to use
+email = user's email
+pwd = user's password
+lName = user's last name
+fName = user's first name
+mName = user's middle name (if applicable)
+UID = user's ID
+ListName = name of the list
+LID = list ID
+TID = task ID
+TaskName = name of the task
+Complete = boolean indicating if task is complete or not *default is false*
+Details = details of the task (optional) *gets sent as blank string from js file if not supplied*

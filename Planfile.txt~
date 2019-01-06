@@ -1,0 +1,33 @@
+Planfile
+this file's purpose in life is to outline the plan for the program
+
+Scope: App should be able to keep track of tasks for each user.
+
+Tasks: Write startup script, 
+       write the back end framework, 
+       track variable names in Varsfile, 
+       Plan database structure,
+       write front end scripts.
+       
+Breakdown:
+				Plan database structure:
+					-Users
+					-tasks
+					-lists
+				Write startup script:
+					-connect with MySQL
+					-create database
+					-create schema
+				Track variable names in Varsfile:
+					-place variable name and meaning side by side
+					-bottom up approach (MySQL name is placed first each after mimics)
+				Write back end framework:
+					-login script
+					-homepage script
+					-signup script
+					-list script
+				Write front end scripts:
+					-index page 
+					-ajax systems
+					-DOM systems
+					-page "feel"
