@@ -1,0 +1,32 @@
+<!Doctype html>
+<html>
+	<head>
+		<title>List APP</title>
+		<meta name="author" content="zackm" >
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="CSS/bulma.css" />
+		<script type="text/javascript" src="JS/index.js">
+		</script>
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="localhost"></a>
+				<a role="button" class="navbar-burger burger">
+					<span></span>
+					<span></span>
+					<span></span>
+				</a>
+			</div>
+		</nav>
+		<section class="hero is-success is-bold is-fullheight-with-navbar">
+			<div class="hero-body">
+				<div class="container">
+					<p class="title">
+						ListApp - a simple task list application for the web
+					</p>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
