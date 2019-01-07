@@ -7,7 +7,8 @@ Tasks: Write startup script,                DONE 20190102
        write the back end framework,        DONE ...I think 20190103
        track variable names in Varsfile,    IN-PROGRESS
        Plan database structure,             DONE 20190101
-       write front end scripts.
+       write front end scripts,
+       Write .htaccess file->forced https   DONE 20190107
        
 Breakdown:
 				Plan database structure: done
