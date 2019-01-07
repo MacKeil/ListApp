@@ -28,7 +28,7 @@
 	<body>
 		<nav class="navbar">
 			<div class="navbar-brand">
-				<a class="navbar-item has-backgound-info" href="localhost">
+				<a class="navbar-item has-background-info" href="localhost">
 					<img src="Pictures/icon.png" alt="ListApp"><strong>&nbsp ListApp</strong>
 				</a>
 				
