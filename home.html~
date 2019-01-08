@@ -24,5 +24,22 @@
 		<link rel="stylesheet" href="CSS/bulma.css" />
 		<script type="text/javascript" src="JS/home.js"></script>
 	</head>
-	<body></body>
+	<body>
+		<nav class="navbar">
+			<div class="navbar-brand">
+				<a class="navbar-item has-background-info" href="localhost/index.html">
+					<img src="Pictures/icon.png" alt="ListApp"><strong>&nbsp ListApp</strong>
+				</a>
+				
+				<a role="button" class="navbar-burger burger">
+					<span></span>
+					<span></span>
+					<span></span>
+				</a>
+			</div>
+			<div class="navbar-menu">
+				<div class="navbar-end"></div>
+			</div>
+		</nav>
+	</body>
 </html>
