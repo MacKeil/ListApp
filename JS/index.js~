@@ -1,5 +1,9 @@
 
 var modal = document.getElementsByClassName("modal");
+var del = document.getElementsByClassName("delete");
+var mbkg = document.getElementsByClassName("modal-background");
+var burger = document.getElementsByClassName("burger");
+var nvmu = document.getElementsByClassName("navbar-menu");
 
 function makeSignUpActive() {
 	modal[0].classList.add("is-active");
@@ -25,20 +29,36 @@ function signUp() {
 	document.signup.submit();
 }
 
+function burgerExpand() {
+	if(burger[0].classList[2] === "is-active"){
+		burger[0].classList.remove("is-active");
+		nvmu[0].classList.remove("is-active");
+	}
+	else{
+		burger[0].classList.add("is-active");
+		nvmu[0].classList.add("is-active");
+	}
+}
+
 window.onload = function(){
 	var btns = document.getElementsByClassName("button");
 	var modal = document.getElementsByClassName("modal");
-	if(btns[0]){
-		btns[0].addEventListener("click", makeSignUpActive);
-	}
-	if(btns[2]){
-		btns[2].addEventListener("click", makeSignUpActive);
-	}
+	var del = document.getElementsByClassName("delete");
+	var mbkg = document.getElementsByClassName("modal-background");
+	var burger = document.getElementsByClassName("burger");
+	var nvmu = document.getElementsByClassName("navbar-menu");
+
+	btns[0].addEventListener("click", makeSignUpActive);
+	btns[2].addEventListener("click", makeSignUpActive);
 	btns[1].addEventListener("click", makeLogInActive);
 	btns[3].addEventListener("click", makeLogInActive);
 	btns[5].addEventListener("click", hideSignUp);
 	btns[7].addEventListener("click", hideLogIn);
 	btns[4].addEventListener("click", signUp);
 	btns[6].addEventListener("click", logIn);
+	del[0].addEventListener("click", hideSignUp);
+	del[1].addEventListener("click", hideLogIn);
+	mbkg[0].addEventListener("click", hideSignUp);
+	mbkg[1].addEventListener("click", hideLogIn);
 }
 
