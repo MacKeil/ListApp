@@ -22,6 +22,7 @@
 		<meta name="author" content="zackm" >
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="CSS/bulma.css" />
+		<link rel="stylesheet" href="CSS/index.css" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 		<script type="text/javascript" src="JS/index.js"></script>
 	</head>
@@ -55,10 +56,15 @@
 		</nav>
 		<section class="hero is-success is-bold is-fullheight-with-navbar">
 			<div class="hero-body">
-				<div class="container">
+				<div class="container has-text-centered">
 					<p class="title">
 						ListApp - a simple task list application for the web
 					</p>
+					<br>
+					<a class="button is-large is-primary mobile-only">Sign Up!</a>
+					<br>
+					<br>
+					<a class="button is-large is-primary mobile-only">Log In</a>
 				</div>
 			</div>
 		</section>
@@ -91,25 +97,25 @@
 						</div>
 						<div class="field">
 							<div class="control has-icons-left">
-								<input class="input is-medium" type="text" name="fName" placeholder="First Name" />
+								<input class="input is-medium" type="text" name="fName" placeholder="First Name (Optional)" />
 								<span class="icon is-large is-left">
-									<i class=""></i>
+									<i class="fas fa-user"></i>
 								</span>
 							</div>
 						</div>
 						<div class="field">
 							<div class="control has-icons-left">
-								<input class="input is-medium" type="text" name="mName" placeholder="Middle Name" />
+								<input class="input is-medium" type="text" name="mName" placeholder="Middle Name (Optional)" />
 								<span class="icon is-large is-left">
-									<i class=""></i>
+									<i class="fas fa-user"></i>
 								</span>
 							</div>
 						</div>
 						<div class="field">
 							<div class="control has-icons-left">
-								<input class="input is-medium" type="text" name="lName" placeholder="Last Name" />
+								<input class="input is-medium" type="text" name="lName" placeholder="Last Name (Optional)" />
 								<span class="icon is-large is-left">
-									<i class=""></i>
+									<i class="fas fa-user"></i>
 								</span>
 							</div>
 						</div>
@@ -156,7 +162,7 @@
 					</form>
 				</section>
 				<footer class="modal-card-foot">
-					<button class="button is-sucess">Log me in</button>
+					<button class="button is-success">Log me in</button>
 					<button class="button">Nevermind</button>
 				</footer>
 			</div>
