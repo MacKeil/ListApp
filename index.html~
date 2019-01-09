@@ -72,6 +72,56 @@
 					<button class="delete"></button>
 				</header>
 				<section class="modal-card-body">
+					<form action="signup.php" method="post" name="signup">
+						<div class="field">
+							<div class="control has-icons-left">
+								<input name="email" type="email" class="input is-medium" placeholder="email@example.com" />
+								<span class="icon is-large is-left">
+									<i class="fas fa-envelope"></i>
+								</span>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control has-icons-left">
+								<input name="username" type="text" class="input is-medium" placeholder="Username" />
+								<span class="icon is-large is-left">
+									<i class="fas fa-address-card"></i>
+								</span>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control has-icons-left">
+								<input class="input is-medium" type="text" name="fName" placeholder="First Name" />
+								<span class="icon is-large is-left">
+									<i class=""></i>
+								</span>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control has-icons-left">
+								<input class="input is-medium" type="text" name="mName" placeholder="Middle Name" />
+								<span class="icon is-large is-left">
+									<i class=""></i>
+								</span>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control has-icons-left">
+								<input class="input is-medium" type="text" name="lName" placeholder="Last Name" />
+								<span class="icon is-large is-left">
+									<i class=""></i>
+								</span>
+							</div>
+						</div>
+						<div class="field">
+							<div class="control has-icons-left">
+								<input class="input is-medium" type="password" name="pwd" placeholder="Password" />
+								<span class="icon is-large is-left">
+									<i class="fas fa-lock"></i>
+								</span>
+							</div>
+						</div>
+					</form>
 				</section>
 				<footer class="modal-card-foot">
 					<button class="button is-success">Sign me up!</button>
@@ -88,7 +138,7 @@
 					<button class="delete"></button>
 				</header>
 				<section class="modal-card-body">
-					<form action="login.php" method="post">
+					<form action="login.php" method="post" name="login">
 						<div class="field">
 							<div class="control has-icons-left">
 								<input class="input is-large" type="email" name="email"/>
