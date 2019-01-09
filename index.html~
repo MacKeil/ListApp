@@ -64,7 +64,7 @@
 					<a class="button is-large is-primary mobile-only">Sign Up!</a>
 					<br>
 					<br>
-					<a class="button is-large is-primary mobile-only">Log In</a>
+					<a class="button is-large is-info mobile-only">Log In</a>
 				</div>
 			</div>
 		</section>

@@ -16,9 +16,28 @@ else{
 	//start database connection
 	$conn = new mysqli("localhost", "root", "toor", "listapp");
 	//sort by action requested
+	if(isset($_POST["pwd"])){
+		$sql = "UPDATE Users SET pwd=".$_POST['pwd']." WHERE UID=".$_SESSION["UID"];
+		if($conn->query($sql)){
+			$conn->free();
+			echo "success";
+		}
+		else{
+			$conn->free();
+			echo "Sorry try again.";
+		}
+	}
+	if($request['table'] == "Users" && $request["action"] == 'get'){
+		//homepage requested to see the user's information
+		$result = $conn->query("SELECT username, fName, mName, lName FROM Users WHERE UID=".$_SESSION['UID']);
+		$row = $result->fetch_assoc();//turn the result into a use-able form
+		$json = json_encode($row);//convert to json
+		$conn->free();//free up the connection
+		echo $json;//send all the data we have the js will parse it for usefulness 
+	}
 	if($request['table'] == "Lists" && $request["action"] == 'get'){
 		//homepage requested to see all lists for the user
-			$result = $conn->query("SELECT ListName, Details, LID FROM TABLE Lists WHERE UID=".$_SESSION['UID']);
+			$result = $conn->query("SELECT ListName, Details, LID FROM Lists WHERE UID=".$_SESSION['UID']);
 			$row = $result->fetch_assoc();//give us something to turn into a json string
 			$json = json_encode($row);//convert to json for js file to interpret
 			$conn->free();//free up the connection
@@ -58,6 +77,17 @@ else{
 			echo "Sorry try again.";
 		}
 		$conn->free();//free up the connection to the database
+	}
+	if($request['table'] == "Users" && $request['action'] == 'update'){
+		if($request['target'] == 'username'){
+		}
+		if($request['target'] == 'fName'){
+		}
+		if($request['target'] == 'mName'){
+		}
+		if($request['target'] == 'lName'){
+		}
+		
 	}
 	if($request['table'] == "Lists" && $request['action'] == 'update'){
 		//home page requested to update a list
