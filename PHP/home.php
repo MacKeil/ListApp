@@ -80,12 +80,48 @@ else{
 	}
 	if($request['table'] == "Users" && $request['action'] == 'update'){
 		if($request['target'] == 'username'){
+			$sql = "UPDATE Users SET username=".$request["username"]." WHERE UID=".$_SESSION["UID"];
+			if($conn->query($sql)){
+				$conn->free();
+				echo "success";
+			}
+			else {
+				$conn->free();
+				echo "sorry try again.";
+			}
 		}
 		if($request['target'] == 'fName'){
+			$sql = "UPDATE Users SET fName=".$request["fName"]." WHERE UID=".$_SESSION["UID"];
+			if($conn->query($sql)){
+				$conn->free();
+				echo "success";
+			}
+			else {
+				$conn->free();
+				echo "sorry try again.";
+			}
 		}
 		if($request['target'] == 'mName'){
+			$sql = "UPDATE Users SET mName=".$request["mName"]." WHERE UID=".$_SESSION["UID"];
+			if($conn->query($sql)){
+				$conn->free();
+				echo "success";
+			}
+			else {
+				$conn->free();
+				echo "sorry try again.";
+			}
 		}
 		if($request['target'] == 'lName'){
+			$sql = "UPDATE Users SET lName=".$request["lName"]." WHERE UID=".$_SESSION["UID"];
+			if($conn->query($sql)){
+				$conn->free();
+				echo "success";
+			}
+			else {
+				$conn->free();
+				echo "sorry try again.";
+			}
 		}
 		
 	}
