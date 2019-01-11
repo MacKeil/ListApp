@@ -1,7 +1,24 @@
 window.onload = function () {
+	var burger = document.getElementsByClassName("navbar-burger");
+	var burgerMenu = document.getElementsByClassName("navbar-menu");
+	burger[0].addEventListener("click", function(){
+		if(burger[0].classList[2] == "is-active"){
+			burger[0].classList.remove("is-active");
+			burgerMenu[0].classList.remove("is-active");
+		}
+		else{
+			burger[0].classList.add("is-active");
+			burgerMenu[0].classList.add("is-active");
+		}
+	});
+};
+
+document.onload = function () {
+	
 	var title = document.getElementsByTagName("title");
 	var welcome = document.getElementsByTagName("h1");
 	var panelTitle = document.getElementsByClassName("panel-heading");
+	
 	var startReq = {"table":"Users", "action":"get"};
 	var xmlhttp = new XMLHTTPRequest();
 	xmlhttp.onreadystate = function () {
@@ -30,3 +47,19 @@ window.onload = function () {
 	xmlhttp.open("GET", "home.php?q="+JSON.stringify(startReq), true);
 	xmlhttp.send();
 };
+
+function openList(var iter, var LID) {
+	var request = {"table": "Lists", "action": "get", "LID": LID};
+	var otherLists = document.getElementsByClassName("panel-block");
+	var panelTitle = document.getElementsByClassName("panel-heading");
+	for (var i = 0; i < otherLists.length; i++) {
+		otherLists[i].classList.add("hide");
+	}
+	var reqString = JSON.stringify(request);
+	var xhp = new XMLHTTPRequest();
+	xhp.onreadystatechange = function () {
+		if(xhp.readyState == 4 && xhp.status == 200){
+			//add tasks to the list and change the heading to the list name
+		}
+	};
+}
