@@ -7,7 +7,12 @@
 .site-section{
 	flex: 1;
 }
-
+.hide{
+	display: none;
+}
+.panel-color{
+	background-color: whitesmoke;
+}
 @media only screen and (min-width: 777px){
 	.mobile-only{
 		display: none;
