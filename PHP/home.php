@@ -53,7 +53,7 @@ else{
 	}
 	if($request['table'] == "Lists" && $request['action'] == 'create'){
 		//home page requested to make a new list
-		$sql = "INSERT INTO Lists(ListName, Details, UID) Values(".$request['ListName'].", ".$_SESSION['Details'].", ".$_SESSION['UID'].")";
+		$sql = "INSERT INTO Lists(ListName, Details, UID) Values(".$request['ListName'].", ".$request['Details'].", ".$_SESSION['UID'].")";
 		if($conn->query($sql)){
 			//if the query worked send an alert up to the front end
 			echo "success";
