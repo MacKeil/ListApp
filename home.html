@@ -95,7 +95,7 @@
 			<div class="modal-background"></div>
 			<div class="modal-card">
 				<header class="modal-card-head">
-					<p class="modal-card-title">Log In</p>
+					<p class="modal-card-title">Create a List</p>
 					<button class="delete"></button>
 				</header>
 				<section class="modal-card-body">
@@ -117,6 +117,42 @@
 				</section>
 				<footer class="modal-card-foot">
 					<button class="button is-success">Create List</button>
+					<button class="button">Nevermind</button>
+				</footer>
+			</div>
+		</div>
+        <div class="modal">
+			<!--Task Modal-->
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Create a Task</p>
+					<button class="delete"></button>
+				</header>
+				<section class="modal-card-body">
+					<form action="" method="post" name="List">
+						<div class="field">
+							<div class="control has-icons-left">
+								<input class="input is-large" type="text" name="TaskName" placeholder="Task Name"/>
+								<span class="icon is-large is-left">
+									<i class="fas fa-envelope"></i>
+								</span>
+							</div>
+						</div>
+                        <div class="field">
+                            <div class="control has-icons-left">
+                                <input class="input is-large" type='textbox' name="Details" placeholder="About task (optional)"/>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-large" type="checkbox" name="Complete" title="Already done?"/>
+                            </div>
+                        </div>
+					</form>
+				</section>
+				<footer class="modal-card-foot">
+					<button class="button is-success">Create Task</button>
 					<button class="button">Nevermind</button>
 				</footer>
 			</div>

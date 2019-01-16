@@ -1,4 +1,5 @@
 window.onload = function () {
+    //DOM manipulation for existing elements
 	var burger = document.getElementsByClassName("navbar-burger"),
         burgerMenu = document.getElementsByClassName("navbar-menu"),
         btns = document.getElementsByClassName("button");
@@ -19,7 +20,7 @@ window.onload = function () {
 };
 
 document.onload = function () {
-	
+	//ajax call and DOM manipulation for new elements
 	var title = document.getElementsByTagName("title"),
 	    welcome = document.getElementsByTagName("h1"),
 	    panelTitle = document.getElementsByClassName("panel-heading");
@@ -84,10 +85,20 @@ function completed(TID, status){
     xhp.send();
 }
 
+function openPanel(){
+    //gets all lists for the user and places them on the screen
+}
+
 function openList(LID) {
+    //takes selected list and gets tasks, then changes panel to fit task
 	var request = {"table": "Lists", "action": "get", "LID": LID};
 	var otherLists = document.getElementsByClassName("panel-block");
 	var panelTitle = document.getElementsByClassName("panel-heading");
+    var btns = document.getElementsByClassName("button");
+    btns[0].onclick = createTask;
+    btns[2].onclick = createTask;
+    btns[0].innerText = "Add Task";
+    btns[2].innerText = "Add Task";
 	panelTitle.innerText = document.getElementById(LID).innerText;
 	for (var i = 0; i < otherLists.length; i++) {
 		otherLists[i].classList.add("hide");
@@ -174,3 +185,23 @@ function taskGen(TID, taskName, taskDetails, completed) {
     nodeHolder.appendChild(columnDiv);
     document.getElementsByClassName("panel")[0].appendChild(nodeHolder);
 }
+
+function listGen(LID, ListName, Details){
+    //creates a list for the DOM
+}
+function createList(){
+    //opens list modal
+}
+
+function createTask(){
+    //opens task modal
+}
+
+function sendTask(){
+    //sends the new task to the back end and calls openList again
+}
+
+function sendList(){
+    //sends the new list info to the backend and calls openPanel again
+}
+
