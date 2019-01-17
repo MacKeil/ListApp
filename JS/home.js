@@ -226,6 +226,9 @@ function sendTask(LID){
     };
     xhp.open("GET", "PHP/home.php?q=" + reqStr, true);
     xhp.send();
+    
+    taskFrom.reset();
+    openList(LID);
 }
 
 function sendList(){
