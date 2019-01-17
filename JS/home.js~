@@ -53,7 +53,7 @@ document.onload = function () {
 			}
 		}
 	}
-	xmlhttp.open("GET", "home.php?q="+JSON.stringify(startReq), true);
+	xmlhttp.open("GET", "PHP/home.php?q="+JSON.stringify(startReq), true);
 	xmlhttp.send();
 };
 
@@ -212,7 +212,7 @@ function createList(){
 function createTask(LID){
     //opens task modal
     var submit = document.getElementById("submit-task"),
-    	  modalBackground = document.getElementsByClassName("modal-background");,
+    	  modalBackground = document.getElementsByClassName("modal-background"),
     	  deleteBtn = document.getElementsByClassName("delete"),
     	  modal = document.getElementsByClassName("modal");
     modalBackground.addEventListener("click", function () {

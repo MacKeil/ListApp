@@ -212,7 +212,7 @@ function createList(){
 function createTask(LID){
     //opens task modal
     var submit = document.getElementById("submit-task"),
-    	  modalBackground = document.getElementsByClassName("modal-background");,
+    	  modalBackground = document.getElementsByClassName("modal-background"),
     	  deleteBtn = document.getElementsByClassName("delete"),
     	  modal = document.getElementsByClassName("modal");
     modalBackground.addEventListener("click", function () {
@@ -241,7 +241,7 @@ function sendTask(LID){
     }
     var reqStr = JSON.stringify(jsonSend);
     var xhp = new XMLHttpRequest();
-    xhp.onreadystatechange = function{
+    xhp.onreadystatechange = function () {
         if(xhp.readyState == 4 && xhp.status == 200){
             alert(xhp.responseText);
         }
