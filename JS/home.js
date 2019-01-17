@@ -95,8 +95,8 @@ function openList(LID) {
 	var otherLists = document.getElementsByClassName("panel-block");
 	var panelTitle = document.getElementsByClassName("panel-heading");
     var btns = document.getElementsByClassName("button");
-    btns[0].onclick = createTask;
-    btns[2].onclick = createTask;
+    btns[0].onclick = createTask(LID);
+    btns[2].onclick = createTask(LID);
     btns[0].innerText = "Add Task";
     btns[2].innerText = "Add Task";
 	panelTitle.innerText = document.getElementById(LID).innerText;
@@ -188,7 +188,7 @@ function taskGen(TID, taskName, taskDetails, completed) {
 
 function listGen(LID, ListName, Details){
     //creates a list for the DOM
-    var name,
+    var listName,
         detailsHolder;
     
 }
@@ -198,8 +198,17 @@ function createList(){
 
 function createTask(LID){
     //opens task modal
-    var submit = document.getElementById("submit-task");
-    
+    var submit = document.getElementById("submit-task"),
+    	  modalBackground = document.getElementsByClassName("modal-background");,
+    	  deleteBtn = document.getElementsByClassName("delete"),
+    	  modal = document.getElementsByClassName("modal");
+    modalBackground.addEventListener("click", function () {
+    	modal.classList.remove("is-active");
+    });
+    deleteBtn.addEventListener("click", function () {
+	 	modal.classList.remove("is-active");   
+    });
+    modal[1].classList.add("is-active");
     submit.onclick = sendTask(LID);
 }
 
