@@ -53,7 +53,7 @@ document.onload = function () {
 			}
 		}
 	}
-	xmlhttp.open("GET", "home.php?q="+JSON.stringify(startReq), true);
+	xmlhttp.open("GET", "PHP/home.php?q="+JSON.stringify(startReq), true);
 	xmlhttp.send();
 };
 
@@ -87,6 +87,19 @@ function completed(TID, status){
 
 function openPanel(){
     //gets all lists for the user and places them on the screen
+    var req = {"table" : "Lists", "action" : "get"};
+    var xhp = new XMLHttpRequest();
+    xhp.onreadystateChange = function () {
+    	if (xhp.readyState == 4 && xhp.status == 200) {
+    		var response = JSON.parse(this.responseText);
+    		for (var i = 0; i < response.length; i++) {
+    			listGen(response[i]["LID"], response[i]["ListName"], response[i]["Details"]);
+    		}
+    		
+    	}
+    };
+    xhp.open("GET", "PHP/home.php?=" + JSON.stringify(req), true);
+    xhp.send();
 }
 
 function openList(LID) {
@@ -242,6 +255,8 @@ function sendTask(LID){
 
 function sendList(){
     //sends the new list info to the backend and calls openPanel again
+    
+    openPanel();
 }
 
 function accountInfo(){

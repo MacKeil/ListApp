@@ -87,6 +87,19 @@ function completed(TID, status){
 
 function openPanel(){
     //gets all lists for the user and places them on the screen
+    var req = {"table" : "Lists", "action" : "get"};
+    var xhp = new XMLHttpRequest();
+    xhp.onreadystateChange = function () {
+    	if (xhp.readyState == 4 && xhp.status == 200) {
+    		var response = JSON.parse(this.responseText);
+    		for (var i = 0; i < response.length; i++) {
+    			listGen(response[i]["LID"], response[i]["ListName"], response[i]["Details"]);
+    		}
+    		
+    	}
+    };
+    xhp.open("GET", "PHP/home.php?=" + JSON.stringify(req), true);
+    xhp.send();
 }
 
 function openList(LID) {
@@ -188,7 +201,7 @@ function taskGen(TID, taskName, taskDetails, completed) {
 
 function listGen(LID, ListName, Details){
     //creates a list for the DOM
-    var name,
+    var listName,
         detailsHolder;
     
 }
@@ -198,8 +211,17 @@ function createList(){
 
 function createTask(LID){
     //opens task modal
-    var submit = document.getElementById("submit-task");
-    
+    var submit = document.getElementById("submit-task"),
+    	  modalBackground = document.getElementsByClassName("modal-background");,
+    	  deleteBtn = document.getElementsByClassName("delete"),
+    	  modal = document.getElementsByClassName("modal");
+    modalBackground.addEventListener("click", function () {
+    	modal.classList.remove("is-active");
+    });
+    deleteBtn.addEventListener("click", function () {
+	 	modal.classList.remove("is-active");   
+    });
+    modal[1].classList.add("is-active");
     submit.onclick = sendTask(LID);
 }
 
@@ -233,6 +255,8 @@ function sendTask(LID){
 
 function sendList(){
     //sends the new list info to the backend and calls openPanel again
+    
+    openPanel();
 }
 
 function accountInfo(){
