@@ -104,19 +104,19 @@
 							<div class="control has-icons-left">
 								<input class="input is-large" type="text" name="ListName" placeholder="List Name"/>
 								<span class="icon is-large is-left">
-									<i class="fas fa-envelope"></i>
+									<i class="fas fa-list"></i>
 								</span>
 							</div>
 						</div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-large" type='textbox' name="Details" placeholder="About list (optional)"/>
+                                <textarea class="textarea" name="Details" placeholder="List Details (optional)"></textarea>
                             </div>
                         </div>
 					</form>
 				</section>
 				<footer class="modal-card-foot">
-					<button class="button is-success">Create List</button>
+					<button id="submit-list" class="button is-success">Create List</button>
 					<button class="button">Nevermind</button>
 				</footer>
 			</div>
@@ -130,29 +130,32 @@
 					<button class="delete"></button>
 				</header>
 				<section class="modal-card-body">
-					<form action="" method="post" name="List">
+					<form action="" method="post" name="Task">
 						<div class="field">
 							<div class="control has-icons-left">
 								<input class="input is-large" type="text" name="TaskName" placeholder="Task Name"/>
 								<span class="icon is-large is-left">
-									<i class="fas fa-envelope"></i>
+									<i class="fas fa-list"></i>
 								</span>
 							</div>
 						</div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <input class="input is-large" type='textbox' name="Details" placeholder="About task (optional)"/>
+                                <textarea class="textarea" placeholder="Details" name="Details"></textarea>
                             </div>
                         </div>
                         <div class="field">
                             <div class="control">
-                                <input class="input is-large" type="checkbox" name="Complete" title="Already done?"/>
+                                <label class="checkbox">
+                                    <input class="checkbox" name="Complete" type="checkbox"/>
+                                    Already Done?
+                                </label>
                             </div>
                         </div>
 					</form>
 				</section>
 				<footer class="modal-card-foot">
-					<button class="button is-success">Create Task</button>
+					<button id="submit-task" class="button is-success">Create Task</button>
 					<button class="button">Nevermind</button>
 				</footer>
 			</div>

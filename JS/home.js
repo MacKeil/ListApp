@@ -188,20 +188,50 @@ function taskGen(TID, taskName, taskDetails, completed) {
 
 function listGen(LID, ListName, Details){
     //creates a list for the DOM
+    var name,
+        detailsHolder;
+    
 }
 function createList(){
     //opens list modal
 }
 
-function createTask(){
+function createTask(LID){
     //opens task modal
+    var submit = document.getElementById("submit-task");
+    
+    submit.onclick = sendTask(LID);
 }
 
-function sendTask(){
+function sendTask(LID){
     //sends the new task to the back end and calls openList again
+    var taskFrom = document.getElementsByName("Task"),
+        formData = new FormData(taskFrom[0]),
+        jsonSend = {"table" : "Tasks", "action" : "create", "LID" : LID};
+    for (var iter of formData.entries()){
+        jsonSend[iter[0]] = iter[1];
+    }
+    if(!jsonSend.Complete){
+        jsonSend.Complete = 0;
+    }
+    else{
+        jsonSend.Complete = 1;
+    }
+    var reqStr = JSON.stringify(jsonSend);
+    var xhp = new XMLHttpRequest();
+    xhp.onreadystatechange = function{
+        if(xhp.readyState == 4 && xhp.status == 200){
+            alert(xhp.responseText);
+        }
+    };
+    xhp.open("GET", "PHP/home.php?q=" + reqStr, true);
+    xhp.send();
 }
 
 function sendList(){
     //sends the new list info to the backend and calls openPanel again
 }
 
+function accountInfo(){
+    //open the account info menu
+}
