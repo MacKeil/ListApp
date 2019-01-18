@@ -26,7 +26,7 @@ document.onload = function () {
 	    panelTitle = document.getElementsByClassName("panel-heading");
 	
 	var startReq = {"table" : "Users", "action" : "get"};
-	var xmlhttp = new XMLHTTPRequest();
+	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystate = function () {
 		if (this.readyState === 4 && this.status === 200){
 			var resp = JSON.parse(this.responseText);
@@ -107,17 +107,28 @@ function openList(LID) {
 	var request = {"table": "Lists", "action": "get", "LID": LID};
 	var otherLists = document.getElementsByClassName("panel-block");
 	var panelTitle = document.getElementsByClassName("panel-heading");
-    var btns = document.getElementsByClassName("button");
-    btns[0].onclick = createTask(LID);
-    btns[2].onclick = createTask(LID);
+   var btns = document.getElementsByClassName("button"),
+   	 backBtn = document.createElement("a");
+   var bBIconSP = document.createElement("span"),
+       bBIcon = document.createElement("i"),
+       addBtn = document.getElementsByClassName("add-btn");
+    bBIconSP.classList.add("icon");
+    bBIcon.classList.add("fas", "fa-arrow-left");
+    bBIconSP.appendChild(bBIcon);
+    btns[0].onclick = function () {createTask(LID)};
+    btns[2].onclick = function () {createTask(LID)};
     btns[0].innerText = "Add Task";
     btns[2].innerText = "Add Task";
-	panelTitle.innerText = document.getElementById(LID).innerText;
+	panelTitle[0].innerText = document.getElementById(LID).innerText;
+	backBtn.onclick = closeList;
+   backBtn.id = 'backBtn';
+   backBtn.appendChild(bBIconSP);
+   panelTitle[0].insertAdjacentElement("afterBegin", backBtn);
 	for (var i = 0; i < otherLists.length; i++) {
 		otherLists[i].classList.add("hide");
 	}
 	var reqString = JSON.stringify(request);
-	var xhp = new XMLHTTPRequest();
+	var xhp = new XMLHttpRequest();
 	xhp.onreadystatechange = function () {
 		if(xhp.readyState == 4 && xhp.status == 200){
 			//add tasks to the list and change the heading to the list name
@@ -125,17 +136,13 @@ function openList(LID) {
 			for (var i = 0; i < response.length; i++){
                 taskGen(response[i]["TID"], response[i]["TaskName"], response[i]["Details"], response[i]["Complete"]);
             }
-            var backBtn = document.createElement("a"),
-                bBIconSP = document.createElement("span"),
+            var bBIconSP = document.createElement("span"),
                 bBIcon = document.createElement("i"),
                 addBtn = document.getElementsByClassName("add-btn");
             bBIconSP.classList.add("icon");
             bBIcon.classList.add("fas", "fa-arrow-left");
             bBIconSP.appendChild(bBIcon);
-            backBtn.onclick = closeList;
-            backBtn.id = 'backBtn';
-            backBtn.appendChild(bBIconSP);
-            panelTitle[0].insertAdjacentElement("afterBegin", backBtn);
+            
             for(i = 0; i < addBtn.length; i++){
                 addBtn[i].innerText = "Add Task";
                 addBtn[i].onclick = createTask;
@@ -147,7 +154,8 @@ function openList(LID) {
 }
 function closeList (){
     var goAway = document.getElementsByClassName("find-me"),
-        panel = document.getElementsByClassName("panel");
+        panel = document.getElementsByClassName("panel"),
+        btns = document.getElementsByClassName("button");
     for (var i = 0; i < goAway.length; i++){
         panel[0].removeChild(goAway[i]);
     }
@@ -155,7 +163,11 @@ function closeList (){
     for(i = 0; i < lists.length; i++){
         lists[i].classList.remove("hide");
     }
-    panel[0].removeChild(document.getElementById("backBtn"));
+    btns[0].onclick = createList;
+    btns[2].onclick = createList;
+    btns[0].innerText = "Add List";
+    btns[2].innerText = "Add List";
+    document.getElementById("backBtn").remove();
 }
 
 function taskGen(TID, taskName, taskDetails, completed) {
@@ -176,7 +188,7 @@ function taskGen(TID, taskName, taskDetails, completed) {
     columnRight = document.createElement("div");
     columnRight.classList.add("is-pulled-right");
     taskBtn = document.createElement("button");
-    taskBtn.onclick = completed(TID + "btn");
+    taskBtn.onclick = function () {completed(TID + "btn")};
     taskBtn.id = TID + "btn";
     if(completed == 0){
         taskBtn.classList.add("button", "is-success");
@@ -215,14 +227,14 @@ function createTask(LID){
     	  modalBackground = document.getElementsByClassName("modal-background"),
     	  deleteBtn = document.getElementsByClassName("delete"),
     	  modal = document.getElementsByClassName("modal");
-    modalBackground.addEventListener("click", function () {
-    	modal.classList.remove("is-active");
+    modalBackground[1].addEventListener("click", function () {
+    	modal[1].classList.remove("is-active");
     });
-    deleteBtn.addEventListener("click", function () {
-	 	modal.classList.remove("is-active");   
+    deleteBtn[1].addEventListener("click", function () {
+	 	modal[1].classList.remove("is-active");   
     });
     modal[1].classList.add("is-active");
-    submit.onclick = sendTask(LID);
+    submit.onclick = function () {sendTask(LID)};
 }
 
 function sendTask(LID){
@@ -241,7 +253,7 @@ function sendTask(LID){
     }
     var reqStr = JSON.stringify(jsonSend);
     var xhp = new XMLHttpRequest();
-    xhp.onreadystatechange = function{
+    xhp.onreadystatechange = function () {
         if(xhp.readyState == 4 && xhp.status == 200){
             alert(xhp.responseText);
         }
@@ -249,7 +261,7 @@ function sendTask(LID){
     xhp.open("GET", "PHP/home.php?q=" + reqStr, true);
     xhp.send();
     
-    taskFrom.reset();
+    taskFrom[0].reset();
     openList(LID);
 }
 
