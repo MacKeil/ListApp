@@ -281,7 +281,7 @@ function sendTask(LID){
     var xhp = new XMLHttpRequest();
     xhp.onreadystatechange = function () {
         if(xhp.readyState == 4 && xhp.status == 200){
-            alert(xhp.responseText);
+            alert(this.responseText);
         }
     };
     xhp.open("GET", "PHP/home.php?q=" + reqStr, true);
@@ -293,7 +293,21 @@ function sendTask(LID){
 
 function sendList(){
     //sends the new list info to the backend and calls openPanel again
-    
+    var listForm = document.getElementsByName("List"),
+    	  formData = new FormData(listForm[0]),
+    	  jsonSend = {"table" : "Lists", "action" : "create"};
+    for (var iter of formData.entries()) {
+    	jsonSend[iter[0]] = iter[1];
+    }
+    var reqStr = JSON.stringify(jsonSend);
+    var xhp = new XMLHttpRequest();
+    xhp.onreadystatechange = function () {
+    	if (xhp.readyState == 4 && xhp.status == 200) {
+    		alert(this.responseText);
+    	}
+    };
+    xhp.open("GET", "PHP/home.php?q=" + reqStr, true);
+    xhp.send();
     openPanel();
 }
 

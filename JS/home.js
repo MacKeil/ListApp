@@ -314,3 +314,11 @@ function sendList(){
 function accountInfo(){
     //open the account info menu
 }
+
+function updateList(LID) {
+	//opens the list update modal
+}
+
+function updateTask(TID) {
+	//opens the task update modal
+}
