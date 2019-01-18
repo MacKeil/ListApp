@@ -213,12 +213,38 @@ function taskGen(TID, taskName, taskDetails, completed) {
 
 function listGen(LID, ListName, Details){
     //creates a list for the DOM
-    var listName,
-        detailsHolder;
-    
+    var detailsHolder = document.createElement("p"),
+        columnDiv = document.createElement("div"),
+        pullLeft = document.createElement("div"),
+        panel = document.getElementsByClassName("panel"),
+        listHolder = document.createElement("a");
+    listHolder.id = LID;
+    listHolder.classList.add("panel-block", "panel-color");
+    listHolder.onclick = function () {openList(LID)};
+    columnDiv.classList.add("column", "is-6");
+    pullLeft.classList.add("is-pulled-left");
+    detailsHolder.classList.add("content");
+    detailsHolder.innerText = Details;
+    pullLeft.innerText = ListName;
+    pullLeft.appendChild(detailsHolder);
+    columnDiv.appendChild(pullLeft);
+    listHolder.appendChild(columnDiv);
+    panel[0].appendChild(listHolder);
 }
 function createList(){
     //opens list modal
+    var submit = document.getElementById("submit-list"),
+    	  modalBackground = document.getElementsByClassName("modal-background"),
+    	  deleteBtn = document.getElementsByClassName("delete"),
+    	  modal = document.getElementsByClassName("modal");
+    modalBackground[0].addEventListener("click", function () {
+    	modal[0].classList.remove("is-active");
+    });
+    deleteBtn[0].addEventListener("click", function () {
+    	modal[0].classList.remove("is-active");
+    });
+    modal[0].classList.add("is-active");
+    submit.onclick = sendList;
 }
 
 function createTask(LID){
@@ -255,7 +281,7 @@ function sendTask(LID){
     var xhp = new XMLHttpRequest();
     xhp.onreadystatechange = function () {
         if(xhp.readyState == 4 && xhp.status == 200){
-            alert(xhp.responseText);
+            alert(this.responseText);
         }
     };
     xhp.open("GET", "PHP/home.php?q=" + reqStr, true);
@@ -267,7 +293,21 @@ function sendTask(LID){
 
 function sendList(){
     //sends the new list info to the backend and calls openPanel again
-    
+    var listForm = document.getElementsByName("List"),
+    	  formData = new FormData(listForm[0]),
+    	  jsonSend = {"table" : "Lists", "action" : "create"};
+    for (var iter of formData.entries()) {
+    	jsonSend[iter[0]] = iter[1];
+    }
+    var reqStr = JSON.stringify(jsonSend);
+    var xhp = new XMLHttpRequest();
+    xhp.onreadystatechange = function () {
+    	if (xhp.readyState == 4 && xhp.status == 200) {
+    		alert(this.responseText);
+    	}
+    };
+    xhp.open("GET", "PHP/home.php?q=" + reqStr, true);
+    xhp.send();
     openPanel();
 }
 

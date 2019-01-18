@@ -105,20 +105,20 @@ function openPanel(){
 function openList(LID) {
     //takes selected list and gets tasks, then changes panel to fit task
 	var request = {"table": "Lists", "action": "get", "LID": LID};
-	var otherLists = document.getElementsByClassName("panel-block");
-	var panelTitle = document.getElementsByClassName("panel-heading");
-   var btns = document.getElementsByClassName("button"),
-   	 backBtn = document.createElement("a");
-   var bBIconSP = document.createElement("span"),
+	    otherLists = document.getElementsByClassName("panel-block"),
+	    panelTitle = document.getElementsByClassName("panel-heading"),
+       btns = document.getElementsByClassName("button"),
+   	 backBtn = document.createElement("a"),
+       bBIconSP = document.createElement("span"),
        bBIcon = document.createElement("i"),
        addBtn = document.getElementsByClassName("add-btn");
-    bBIconSP.classList.add("icon");
-    bBIcon.classList.add("fas", "fa-arrow-left");
-    bBIconSP.appendChild(bBIcon);
-    btns[0].onclick = function () {createTask(LID)};
-    btns[2].onclick = function () {createTask(LID)};
-    btns[0].innerText = "Add Task";
-    btns[2].innerText = "Add Task";
+   bBIconSP.classList.add("icon");
+   bBIcon.classList.add("fas", "fa-arrow-left");
+   bBIconSP.appendChild(bBIcon);
+   btns[0].onclick = function () {createTask(LID)};
+   btns[2].onclick = function () {createTask(LID)};
+   btns[0].innerText = "Add Task";
+   btns[2].innerText = "Add Task";
 	panelTitle[0].innerText = document.getElementById(LID).innerText;
 	backBtn.onclick = closeList;
    backBtn.id = 'backBtn';
@@ -213,12 +213,38 @@ function taskGen(TID, taskName, taskDetails, completed) {
 
 function listGen(LID, ListName, Details){
     //creates a list for the DOM
-    var listName,
-        detailsHolder;
-    
+    var detailsHolder = document.createElement("p"),
+        columnDiv = document.createElement("div"),
+        pullLeft = document.createElement("div"),
+        panel = document.getElementsByClassName("panel"),
+        listHolder = document.createElement("a");
+    listHolder.id = LID;
+    listHolder.classList.add("panel-block", "panel-color");
+    listHolder.onclick = function () {openList(LID)};
+    columnDiv.classList.add("column", "is-6");
+    pullLeft.classList.add("is-pulled-left");
+    detailsHolder.classList.add("content");
+    detailsHolder.innerText = Details;
+    pullLeft.innerText = ListName;
+    pullLeft.appendChild(detailsHolder);
+    columnDiv.appendChild(pullLeft);
+    listHolder.appendChild(columnDiv);
+    panel[0].appendChild(listHolder);
 }
 function createList(){
     //opens list modal
+    var submit = document.getElementById("submit-list"),
+    	  modalBackground = document.getElementsByClassName("modal-background"),
+    	  deleteBtn = document.getElementsByClassName("delete"),
+    	  modal = document.getElementsByClassName("modal");
+    modalBackground[0].addEventListener("click", function () {
+    	modal[0].classList.remove("is-active");
+    });
+    deleteBtn[0].addEventListener("click", function () {
+    	modal[0].classList.remove("is-active");
+    });
+    modal[0].classList.add("is-active");
+    submit.onclick = sendList;
 }
 
 function createTask(LID){
