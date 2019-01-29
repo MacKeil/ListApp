@@ -11,15 +11,19 @@ if(isset($_POST['email']) && isset($_POST['pwd'])){
 		if($row['pwd'] === $pwd){//if the password is right
 			session_start();	//start a session
 			$_SESSION['uid'] = $row['UID']; //keep the user ID for later
-			$conn->free(); // close the connection
+            results->free();
+			$conn->close(); // close the connection
 			header("Location:../home.html");	//redirect to the user's homepage
 		}	
 		else {
-			echo "Wrong Email or Password, Please try again.";//echo to the front end for an alert dialog		
+			echo "Wrong Email or Password, Please try again.";//echo to the front end for an alert dialog
+            $results->free();
+            $conn->close();
 		}
 	}
 	else {
 		echo "Something went wrong on the server. Please try again later.";
+        $conn->close();
 	}
 }
 //this will only get triggered if the script gets accessed by unauthorized use
