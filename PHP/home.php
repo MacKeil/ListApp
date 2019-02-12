@@ -29,7 +29,7 @@ else{
 	}
 	if($request['table'] == "Users" && $request["action"] == 'get'){
 		//homepage requested to see the user's information
-		$result = $conn->query("SELECT username, fName, mName, lName FROM Users WHERE UID=".$_SESSION['UID']);
+		$result = $conn->query("SELECT username, fName, mName, lName FROM Users WHERE UID='".$_SESSION['UID']."'");
 		$row = $result->fetch_assoc();//turn the result into a use-able form
 		$json = json_encode($row);//convert to json
 		$result->free();//free up the connection
@@ -56,7 +56,7 @@ else{
 	}
 	if($request['table'] == "Lists" && $request['action'] == 'create'){
 		//home page requested to make a new list
-		$sql = "INSERT INTO Lists(ListName, Details, UID) Values(".$request['ListName'].", ".$request['Details'].", ".$_SESSION['UID'].")";
+		$sql = "INSERT INTO Lists(ListName, Details, UID) Values('".$request['ListName']."', '".$request['Details']."', '".$_SESSION['UID']."')";
 		if($conn->query($sql)){
 			//if the query worked send an alert up to the front end
 			echo "success";
@@ -64,6 +64,7 @@ else{
 		else{
 			//if the query failed send an alert to the front end
 			echo "Sorry try again.";	
+            echo $conn->error;
 		}
 		$conn->close();//free up the connection to the database
 	}

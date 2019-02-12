@@ -17,9 +17,10 @@ window.onload = function () {
     btns[2].onclick = createList;
     btns[1].onclick = accountInfo;
     btns[3].onclick = accountInfo;
+    document.body.addEventListener("load", getUser());
 };
 
-document.onload = function () {
+/*document.addEventListener("load", function () {
 	//ajax call and DOM manipulation for new elements
 	var title = document.getElementsByTagName("title"),
 	    welcome = document.getElementsByTagName("h1"),
@@ -53,9 +54,9 @@ document.onload = function () {
 			}
 		}
 	}
-	xmlhttp.open("GET", "PHP/home.php?q="+JSON.stringify(startReq), true);
+	xmlhttp.open("GET", "PHP/home.php?q=" + JSON.stringify(startReq), true);
 	xmlhttp.send();
-};
+});*/
 
 function completed(TID, status){
     var req = {"table" : "Tasks", "action" : "update", "TID" : TID, "target" : "Complete", "Complete" : status},
@@ -309,6 +310,46 @@ function sendList(){
     xhp.open("GET", "PHP/home.php?q=" + reqStr, true);
     xhp.send();
     openPanel();
+}
+
+function getUser() {
+        alert("fired");
+	//ajax call and DOM manipulation for new elements
+	var title = document.getElementsByTagName("title"),
+	    welcome = document.getElementsByTagName("h1"),
+	    panelTitle = document.getElementsByClassName("panel-heading");
+	
+	var startReq = {"table" : "Users", "action" : "get"};
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystate = function () {
+		if (this.readyState === 4 && this.status === 200){
+			var resp = JSON.parse(this.responseText);
+            alert(this.responseText);
+			if(resp.username !== ""){
+				title[0].innerText = resp.username + "'s ListApp";
+				welcome[0].innerText += " " + resp.username;
+				panelTitle[0].innerText = resp.username + panelTitle.innerText;
+				var rememberThis = panelTitle[0].innerText;
+			}
+			else {
+				if(resp.fName != ""){
+					title[0].innerText = resp.fName + "'s ListApp";
+					welcome[0].innerText += " " + resp.fName;
+					panelTitle[0].innerText = resp.fName + panelTitle.innerText
+					var rememberThis = panelTitle[0].innerText;
+				}
+				else{
+					title[0].innerText = "Your ListApp";
+					welcome[0].innerText += " friend!";
+					panelTitle[0].innerText = "Your" + panelTitle.innerText;
+					var rememberThis = panelTitle[0].innerText;
+					alert("If you give create a Username you'll have a more personalized experience");
+				}
+			}
+		}
+	}
+	xmlhttp.open("GET", "PHP/home.php?q=" + JSON.stringify(startReq), true);
+	xmlhttp.send();
 }
 
 function accountInfo(){

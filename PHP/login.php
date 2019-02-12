@@ -3,15 +3,15 @@
 if(isset($_POST['email']) && isset($_POST['pwd'])){
 	$email = clean($_POST['email']);
 	$pwd = clean($_POST['pwd']);
-	$conn = new mysqli("localhost", "root", "toor", "listapp");//connect to database
-	$sql = "SELECT pwd, UID FROM Users WHERE email=".$email;
+	$conn = new mysqli("localhost", "root", /*"toor"*/ NULL, "listapp");//connect to database
+	$sql = "SELECT pwd, UID FROM Users WHERE email='".$email."'";
 	$results = $conn->query($sql);
 	if($results){
 		$row = $results->fetch_assoc();//get the results in a manner we can work with
 		if($row['pwd'] === $pwd){//if the password is right
 			session_start();	//start a session
-			$_SESSION['uid'] = $row['UID']; //keep the user ID for later
-            results->free();
+			$_SESSION['UID'] = $row['UID']; //keep the user ID for later
+            $results->free();
 			$conn->close(); // close the connection
 			header("Location:../home.html");	//redirect to the user's homepage
 		}	

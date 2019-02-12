@@ -13,7 +13,7 @@
 	 	//craft query to delete all tasks associated with this list
 	 	$sql = "DELETE FROM Tasks WHERE LID=".$ListID;
 	 	if($DBConnection->query($sql)){
-	 		$DBConnection->free()//free the connection 
+	 		 
 	 		//if the query worked return true
 	 		return TRUE;
 	 	}
@@ -30,20 +30,18 @@
 	 	//first find all List ID's associated with the user
 	 	$sql = "SELECT Lists.LID FROM Lists WHERE UID=".$UserID;
 	 	$results = $DBConnection->query($sql);
-	 	$DBConnection->free();//free the connection
 	 	$row = $results->fetch_row();//we only need the one row for the one dataset
 	 	$RCount = count($row);//get the length of the dataset
 	 	//run through the dataset and remove the tasks within the lists
 	 	for($i = 0; $i < $RCount; $i++){
 	 		delete_list_tasks($DBConnection, $row[$i]);//use what we already built
 	 	}
+        $results->free();
 	 	//Now delete the lists themselves
 	 	$sql = "DELETE FROM Lists WHERE UID=".$UserID;
 	 	if($DBConnection->query($sql)){
-	 		$DBConnection->free();
 	 		return TRUE;
 	 	}
-	 	$DBConnection->free();
 	 	return FALSE;
 	 }
 ?>
