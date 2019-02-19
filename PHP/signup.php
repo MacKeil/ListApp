@@ -3,7 +3,7 @@
 if(isset($_POST['email']) && isset($_POST['username']) && isset($_POST['pwd'])){
 	$conn = new mysqli('localhost', 'root', /*'toor'*/ NULL, 'listapp'); //connect to the database
 	$email = /*clean(*/$_POST['email'];//);
-	$results = $conn->query('SELECT UID FROM Users WHERE email='.$email);//check if the email already exists
+	$results = $conn->query('SELECT UID FROM Users WHERE email="'.$email.'"');//check if the email already exists
 	//if the email isn't in the database create new user
 	if(!$results){
 		//turn the other two into variables
@@ -47,7 +47,7 @@ if(isset($_POST['email']) && isset($_POST['username']) && isset($_POST['pwd'])){
 		//if the insert failed for whatever reason
 		else{
 			echo "Insertion Error. Please try signing up later.\n Sorry :'(";
-            echo $conn->error;
+            echo $conn->connect_error;
             $conn->close();
 		}
 	}

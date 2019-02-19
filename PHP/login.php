@@ -23,7 +23,9 @@ if(isset($_POST['email']) && isset($_POST['pwd'])){
 	}
 	else {
 		echo "Something went wrong on the server. Please try again later.";
-        $conn->close();
+		echo $conn->error;
+		echo $php_errormsg;
+		$conn->close();
 	}
 }
 //this will only get triggered if the script gets accessed by unauthorized use

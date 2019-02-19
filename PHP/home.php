@@ -36,15 +36,16 @@ else{
 		echo $json;//send all the data we have the js will parse it for usefulness 
         $conn->close();
 	}
-	if($request['table'] == "Lists" && $request["action"] == 'get'){
-		//homepage requested to see all lists for the user
-			$result = $conn->query("SELECT ListName, Details, LID FROM Lists WHERE UID=".$_SESSION['UID']);
-			$row = $result->fetch_assoc();//give us something to turn into a json string
-			$json = json_encode($row);//convert to json for js file to interpret
-			$result->free();//free up the connection
-            $conn->close();
-			echo $json;//send the json to the front end
+	if($request['table'] == 'Lists' && $request['action'] == 'get'){
+		$results = $conn->query("SELECT * FROM Lists WHERE UID='".$_SESSION['UID']."'");
+		while($row = $results->fetch_assoc()){
+			$output[] = $row;
+		}
+		echo json_encode($output);
+		$results->free();
+		$conn->close();
 	}
+
 	if($request['table'] == "Tasks" && $request['action'] == "get"){
 		//home page requested to see all tasks for a list
 		$result = $conn->query("SELECT TaskName, Complete, Details FROM Tasks WHERE LID=".$request["LID"]);

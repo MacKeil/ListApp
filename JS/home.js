@@ -92,7 +92,8 @@ function openPanel(){
     var xhp = new XMLHttpRequest();
     xhp.onreadystateChange = function () {
     	if (xhp.readyState == 4 && xhp.status == 200) {
-    		var response = JSON.parse(this.responseText);
+            var response = JSON.parse(this.response);
+            alert(this.response);
     		for (var i = 0; i < response.length; i++) {
     			listGen(response[i]["LID"], response[i]["ListName"], response[i]["Details"]);
     		}
