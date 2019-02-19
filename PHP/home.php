@@ -48,7 +48,7 @@ else{
 
 	if($request['table'] == "Tasks" && $request['action'] == "get"){
 		//home page requested to see all tasks for a list
-		$result = $conn->query("SELECT TaskName, Complete, Details FROM Tasks WHERE LID=".$request["LID"]);
+		$result = $conn->query("SELECT TID, TaskName, Complete, Details FROM Tasks WHERE LID=".$request["LID"]);
 		while($row = $result->fetch_assoc()){//get a associative array to turn into json
 			$output[] = $row;
 		}

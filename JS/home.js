@@ -58,18 +58,22 @@ window.onload = function () {
 	xmlhttp.send();
 });*/
 
-function completed(TID, status){
-    var req = {"table" : "Tasks", "action" : "update", "TID" : TID, "target" : "Complete", "Complete" : status},
+function completed(TID, taskStatus){
+    var req = {"table" : "Tasks", "action" : "update", "TID" : TID, "target" : "Complete", "Complete" : taskStatus},
         btn = document.getElementById(TID + "btn");
-    if (status === 1){
+    if (taskStatus === 1){
         btn.innerText = "incomplete";
         btn.classList.remove("is-success");
         btn.classList.add("is-danger");
+	btn.removeEventListener("click", function(){completed(TID, 1);});
+	btn.addEventListener("click", function(){completed(TID, 0);});
     }
     else{
         btn.innerText = "complete";
         btn.classList.remove("is-danger");
         btn.classList.add("is-success");
+	btn.removeEventListener("click", function(){completed(TID, 0);});
+	btn.addEventListener("click", function(){completed(TID, 1);});
     }
     var xhp = new XMLHttpRequest();
     xhp.onreadystatechange = function () {
@@ -189,7 +193,7 @@ function taskGen(TID, taskName, taskDetails, completed) {
     columnRight = document.createElement("div");
     columnRight.classList.add("is-pulled-right");
     taskBtn = document.createElement("button");
-    taskBtn.onclick = function () {completed(TID + "btn")};
+    taskBtn.onclick = function () {completed(TID, 1)};
     taskBtn.id = TID + "btn";
     if(completed == 0){
         taskBtn.classList.add("button", "is-success");
