@@ -105,11 +105,11 @@ function openPanel(){
 
 function openList(LID) {
     //takes selected list and gets tasks, then changes panel to fit task
-	var request = {"table": "Lists", "action": "get", "LID": LID};
+	var request = {"table": "Tasks", "action": "get", "LID": LID},
 	    otherLists = document.getElementsByClassName("panel-block"),
 	    panelTitle = document.getElementsByClassName("panel-heading"),
        btns = document.getElementsByClassName("button"),
-   	 backBtn = document.createElement("a"),
+       backBtn = document.createElement("a"),
        bBIconSP = document.createElement("span"),
        bBIcon = document.createElement("i"),
        addBtn = document.getElementsByClassName("add-btn");
@@ -264,11 +264,11 @@ function createTask(LID){
     submit.onclick = function () {sendTask(LID)};
 }
 
-function sendTask(LID){
+function sendTask(LIDN){
     //sends the new task to the back end and calls openList again
     var taskFrom = document.getElementsByName("Task"),
         formData = new FormData(taskFrom[0]),
-        jsonSend = {"table" : "Tasks", "action" : "create", "LID" : LID};
+        jsonSend = {table : "Tasks", action : "create", LID : LIDN};
     for (var iter of formData.entries()){
         jsonSend[iter[0]] = iter[1];
     }

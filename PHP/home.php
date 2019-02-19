@@ -49,10 +49,12 @@ else{
 	if($request['table'] == "Tasks" && $request['action'] == "get"){
 		//home page requested to see all tasks for a list
 		$result = $conn->query("SELECT TaskName, Complete, Details FROM Tasks WHERE LID=".$request["LID"]);
-		$row = $result->fetch_assoc();//get a associative array to turn into json
-		$json = json_encode($row);//convert to json
+		while($row = $result->fetch_assoc()){//get a associative array to turn into json
+			$output[] = $row;
+		}
+		$json = json_encode($output);//convert to json
 		$result->free();//free up the database connection
-        $conn->close();
+        	$conn->close();
 		echo $json;//send the data back up to the front end
 	}
 	if($request['table'] == "Lists" && $request['action'] == 'create'){
@@ -71,8 +73,8 @@ else{
 	}
 	if($request['table'] == "Tasks" && $request['action'] == 'create'){
 		//home page requested to make a new task inside a list
-		$sql = "INSERT INTO Tasks(TaskName, Details, Complete, LID) Values(".$request['TaskName'].", ";
-		$sql .= $request['Details'].", 0, ". $request['LID'].")"; //couldn't stand the long line
+		$sql = "INSERT INTO Tasks(TaskName, Details, Complete, LID) Values('".$request['TaskName']."', '";
+		$sql .= $request['Details']."', '0', '". $request['LID']."')"; //couldn't stand the long line
 		if($conn->query($sql)){
 			//if the query worked send an alert up to the front end
 			echo "success";
