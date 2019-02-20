@@ -78,12 +78,7 @@ function completed(TID, taskStatus){
     var xhp = new XMLHttpRequest();
     xhp.onreadystatechange = function () {
       if (xhp.readyState == 4 && xhp.status == 200){
-          if(xhp.responseText == "success"){
-              alert("Successfully updated");
-          }
-          else{
-              alert(xhp.responseText);
-          }
+              alert(xhp.response);
       }  
     };
     xhp.open("GET", "PHP/home.php?q=" + JSON.stringify(req), true);
@@ -175,7 +170,7 @@ function closeList (){
     document.getElementById("backBtn").remove();
 }
 
-function taskGen(TID, taskName, taskDetails, completed) {
+function taskGen(TID, taskName, taskDetails, isComplete) {
     var nodeHolder,
         nodeText,
         columnDiv,
@@ -193,15 +188,16 @@ function taskGen(TID, taskName, taskDetails, completed) {
     columnRight = document.createElement("div");
     columnRight.classList.add("is-pulled-right");
     taskBtn = document.createElement("button");
-    taskBtn.onclick = function () {completed(TID, 1)};
     taskBtn.id = TID + "btn";
-    if(completed == 0){
+    if(isComplete == 0){
         taskBtn.classList.add("button", "is-success");
         taskBtn.appendChild(document.createTextNode("Completed"));
+	taskBtn.addEventListener("click", function(){completed(TID, 1);});
 	}
     else{
         taskBtn.classList.add("button", "is-danger");
         taskBtn.appendChild(document.createTextNode("incomplete"));
+	taskBtn.addEventListener("click", function(){completed(TID, 0);});
 	}
     nodeText = document.createTextNode(taskName);
     details = document.createElement("p");
@@ -293,7 +289,7 @@ function sendTask(LIDN){
     xhp.send();
     
     taskFrom[0].reset();
-    openList(LID);
+    openList(LIDN);
 }
 
 function sendList(){

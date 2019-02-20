@@ -164,11 +164,11 @@ else{
 	if($request['table'] == "Tasks" && $request['action'] == 'update'){
 		//home page requested to update a task
 		//this one's a bit more tricky as there are a few things that the user may want to update
-		$statement = $conn->prepare("UPDATE Tasks SET ?=? WHERE TID=".$request['TID']);//prepare a statement for this task
+		$sql = "UPDATE Tasks SET ";
 		if($request['target'] === 'TaskName'){
-			//user want's to update the TaskName
-			$statement->bind_param("ss", $request['target'], $request['TaskName']);//bind the parameters appropriately
-			if($statement->execute()){
+		//user want's to update the TaskName
+			$sql .= "TaskName='".$request['TaskName']."' WHERE TID='".$request['TID']."'";
+			if($conn->query($sql)){
 				//if it worked update the front end
 				echo "success";
 			}
@@ -179,8 +179,8 @@ else{
 		}
 		if($request['target'] === 'Details'){
 			//user want's to update the task details
-			$statement->bind_param("ss", $request['target'], $request['Details']);//bind the parameters appropriately
-			if($statement->execute()){
+			$sql .= "Details='".$request['Details']."' WHERE TID='".$request['TID']."'";
+			if($conn->query($sql)){
 				//if it worked update the front end
 				echo "success";
 			}
@@ -191,8 +191,8 @@ else{
 		}
 		if($request['target'] === 'Complete'){
 			//user want's to update the task's completion status
-			$statement->bind_param("ss", $request['target'], $request['Complete']);//bind the parameters appropriately
-			if($statement->execute()){
+			$sql .= "Complete='".$request['Complete']."' WHERE TID='".$request['TID']."'";
+			if($conn->query($sql)){
 				//if it worked update the front end
 				echo "success";
 			}
@@ -200,7 +200,6 @@ else{
 				echo "Sorry try again.";
 			}
 		}
-		$statement->close();//close out the prepared statement
 		$conn->close();//free up the connection to the database
 	}
 	if($request['table'] == "Lists" && $request['action'] == 'delete'){
