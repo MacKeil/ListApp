@@ -20,43 +20,7 @@ window.onload = function () {
     document.body.addEventListener("load", getUser());
 };
 
-/*document.addEventListener("load", function () {
-	//ajax call and DOM manipulation for new elements
-	var title = document.getElementsByTagName("title"),
-	    welcome = document.getElementsByTagName("h1"),
-	    panelTitle = document.getElementsByClassName("panel-heading");
-	
-	var startReq = {"table" : "Users", "action" : "get"};
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystate = function () {
-		if (this.readyState === 4 && this.status === 200){
-			var resp = JSON.parse(this.responseText);
-			if(resp.username !== ""){
-				title[0].innerText = resp.username + "'s ListApp";
-				welcome[0].innerText += " " + resp.username;
-				panelTitle[0].innerText = resp.username + panelTitle.innerText;
-				var rememberThis = panelTitle[0].innerText;
-			}
-			else {
-				if(resp.fName != ""){
-					title[0].innerText = resp.fName + "'s ListApp";
-					welcome[0].innerText += " " + resp.fName;
-					panelTitle[0].innerText = resp.fName + panelTitle.innerText
-					var rememberThis = panelTitle[0].innerText;
-				}
-				else{
-					title[0].innerText = "Your ListApp";
-					welcome[0].innerText += " friend!";
-					panelTitle[0].innerText = "Your" + panelTitle.innerText;
-					var rememberThis = panelTitle[0].innerText;
-					alert("If you give create a Username you'll have a more personalized experience");
-				}
-			}
-		}
-	}
-	xmlhttp.open("GET", "PHP/home.php?q=" + JSON.stringify(startReq), true);
-	xmlhttp.send();
-});*/
+
 
 function completed(TID, taskStatus){
     var req = {"table" : "Tasks", "action" : "update", "TID" : TID, "target" : "Complete", "Complete" : taskStatus},
@@ -133,9 +97,11 @@ function openList(LID) {
 		if(xhp.readyState == 4 && xhp.status == 200){
 			//add tasks to the list and change the heading to the list name
 			var response = JSON.parse(this.responseText);
-			for (var i = 0; i < response.length; i++){
-                taskGen(response[i]["TID"], response[i]["TaskName"], response[i]["Details"], response[i]["Complete"]);
-            }
+			if(response !== null){
+				for (var i = 0; i < response.length; i++){
+        	        taskGen(response[i]["TID"], response[i]["TaskName"], response[i]["Details"], response[i]["Complete"]);
+            			}
+			}
             var bBIconSP = document.createElement("span"),
                 bBIcon = document.createElement("i"),
                 addBtn = document.getElementsByClassName("add-btn");
@@ -156,18 +122,19 @@ function closeList (){
     var goAway = document.getElementsByClassName("find-me"),
         panel = document.getElementsByClassName("panel"),
         btns = document.getElementsByClassName("button");
-    for (var i = 0; i < goAway.length; i++){
-        panel[0].removeChild(goAway[i]);
+    for (var i = goAway.length; i > 0; i--){
+        goAway[i-1].remove();
     }
     var lists = document.getElementsByClassName("hide");
-    for(i = 0; i < lists.length; i++){
-        lists[i].classList.remove("hide");
+    for(i = lists.length; i > 0; i--){
+        lists[i-1].classList.remove("hide");
     }
     btns[0].onclick = createList;
     btns[2].onclick = createList;
     btns[0].innerText = "Add List";
     btns[2].innerText = "Add List";
     document.getElementById("backBtn").remove();
+    getUser(true);
 }
 
 function taskGen(TID, taskName, taskDetails, isComplete) {
@@ -312,12 +279,19 @@ function sendList(){
     openPanel();
 }
 
-function getUser() {
+function getUser(reset) {
 	//ajax call and DOM manipulation for new elements
 	var title = document.getElementsByTagName("title"),
 	    welcome = document.getElementsByTagName("h1"),
 	    panelTitle = document.getElementsByClassName("panel-heading");
-	
+	if(reset === undefined){
+		reset = false;
+	}
+	if(reset){
+		title[0].innerText ="";
+		welcome[0].innerText = "Welcome";
+		panelTitle[0].innerText = "'s Lists";
+	}
 	var startReq = {"table" : "Users", "action" : "get"};
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function () {
@@ -349,7 +323,9 @@ function getUser() {
 	}
 	xmlhttp.open("GET", "PHP/home.php?q=" + JSON.stringify(startReq), true);
 	xmlhttp.send();
-	openPanel();
+	if(!reset){
+		openPanel();
+	}
 }
 
 function accountInfo(){
