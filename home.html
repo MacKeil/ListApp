@@ -173,14 +173,14 @@
 			<div class="modal-background"></div>
 			<div class="modal-card">
 				<header class="modal-card-head">
-					<p class="modal-card-title">Create a Task</p>
+					<p class="modal-card-title">Account Options</p>
 					<button class="delete"></button>
 				</header>
 				<section class="modal-card-body">
 					<form action="" method="post" name="Task">
 						<div class="field">
 							<div class="control has-icons-left">
-								<input class="input is-large" type="text" name="TaskName" placeholder="Task Name"/>
+								<input class="input is-large" type="text" name="username" placeholder="New Username"/>
 								<span class="icon is-large is-left">
 									<i class="fas fa-list"></i>
 								</span>
@@ -188,15 +188,22 @@
 						</div>
                         <div class="field">
                             <div class="control has-icons-left">
-                                <textarea class="textarea" placeholder="Details" name="Details"></textarea>
+                                <input class="input is-large" placeholder="First Name" name="fName"></textarea>
+                            </div>
+						</div>
+						<div class="field">
+                            <div class="control has-icons-left">
+                                <input class="input is-large" placeholder="Middle Name" name="mName"></textarea>
+                            </div>
+                        </div>
+						<div class="field">
+                            <div class="control has-icons-left">
+                                <input class="input is-large" placeholder="Last Name" name="lName"></textarea>
                             </div>
                         </div>
                         <div class="field">
                             <div class="control">
-                                <label class="checkbox">
-                                    <input class="checkbox" name="Complete" type="checkbox"/>
-                                    Already Done?
-                                </label>
+                                <button class="button is-danger" id='chg-pwd'>Change Password</button>
                             </div>
                         </div>
 					</form>
@@ -204,7 +211,8 @@
 				<footer class="modal-card-foot">
 					<button id="submit-task" class="button is-success">Create Task</button>
 					<button class="button">Nevermind</button><br><br>
-					<button class='button is-danger'>Log Out</button>
+					<button class='button is-danger' id='lgout'>Log Out</button><br><br>
+					<button class="button is-danger" id='dltAcnt'>Delete Account</button>
 				</footer>
 			</div>
 		</div>

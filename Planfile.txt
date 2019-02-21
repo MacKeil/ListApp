@@ -29,7 +29,12 @@ Breakdown:
 					-library file     done
 					-logout file      done
 				Write front end scripts:
-					-index page 
-					-ajax systems
+					-index page       done
+					-ajax systems     
 					-DOM systems
 					-page "feel"
+
+Front end TODO:
+	Finish out account modals
+	Create way to edit Lists and Tasks
+	

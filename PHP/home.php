@@ -17,7 +17,7 @@ else{
 	$conn = new mysqli("localhost", "root", /*"toor"*/ NULL, "listapp");
 	//sort by action requested
 	if(isset($_POST["pwd"])){
-		$sql = "UPDATE Users SET pwd=".$_POST['pwd']." WHERE UID=".$_SESSION["UID"];
+		$sql = "UPDATE Users SET pwd='".$_POST['pwd']."' WHERE UID='".$_SESSION["UID"]."'";
 		if($conn->query($sql)){
 			$conn->close();
 			echo "success";
