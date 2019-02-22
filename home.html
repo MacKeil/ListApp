@@ -177,7 +177,7 @@
 					<button class="delete"></button>
 				</header>
 				<section class="modal-card-body">
-					<form action="" method="post" name="Task">
+					<form action="" method="post" name="Account">
 						<div class="field">
 							<div class="control has-icons-left">
 								<input class="input is-large" type="text" name="username" placeholder="New Username"/>
@@ -209,12 +209,58 @@
 					</form>
 				</section>
 				<footer class="modal-card-foot">
-					<button id="submit-task" class="button is-success">Create Task</button>
+					<button id="submit-task" class="button is-success">Submit Changes</button>
 					<button class="button">Nevermind</button><br><br>
 					<button class='button is-danger' id='lgout'>Log Out</button><br><br>
 					<button class="button is-danger" id='dltAcnt'>Delete Account</button>
 				</footer>
 			</div>
+		</div>
+		<div class="modal">
+			<!--Password Modal-->
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Change Password</p>
+					<button class="delete"></button>
+				</header>
+				<section class="modal-card-body">
+					<form action="" method="post" name="Password">
+						<div class="field">
+							<div class="control has-icons-left">
+								<input class="input is-large" type="text" name="pwd" placeholder="New Password"/>
+								<span class="icon is-large is-left">
+									<i class="fas fa-lock"></i>
+								</span>
+							</div>
+						</div>
+					</form>
+				</section>
+				<footer class="modal-card-foot">
+					<button id="submit-task" class="button is-success">Change Password</button>
+					<button class="button">Nevermind</button>
+				</footer>
+			</div>
+		</div>
+		<!-- Logout modal-->
+		<div class="modal">
+			<div class="modal-background"></div>
+			<div class="modal-content">
+				<p>Are you sure you want to log out?</p><br>
+				<a href="PHP/logout.php" class="button is-danger">Log Out</a>
+				<button class="button">Nevermind</button>
+			</div>
+			<div class="modal-close"></div>
+		</div>
+		<!--delete account modal-->
+		<div class="modal">
+			<div class="modal-background"></div>
+			<div class="modal-content">
+				<p>Are you sure you want to delete your account? You won't be able to get any of this information back after.</p><br>
+				<button class="button is-danger">Delete Me!</button>
+				<button class="button is-success">I want to stay</button>
+			</div>
+			<div class="modal-close"></div>
 		</div>
 		<footer class="footer">
 			<div class="content has-text-centered">
