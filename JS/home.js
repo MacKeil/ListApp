@@ -330,6 +330,86 @@ function getUser(reset) {
 
 function accountInfo(){
     //open the account info menu
+    var modal = document.getElementsByClassName('modal')[2],
+        deleteBtn = document.getElementsByClassName('delete')[2],
+        modalBkgrnd = document.getElementsByClassName("modal-background")[2],
+        submit = document.getElementById("submit-UsrChg"),
+        deleteModal = document.getElementById('dltAcnt'),
+        chgPwd = document.getElementById("chg-pwd"),
+        lgOut = document.getElementById("lgout");
+    deleteBtn.addEventListener("click", function(){
+        modal.classList.remove('is-active');
+    });
+    modalBkgrnd.addEventListener("click", function(){
+        modal.classList.remove('is-active');
+    });
+    modal.classList.add("is-active");
+    submit.addEventListener("click", sendAcct);
+    deleteModal.addEventListener('click', deleteAcctModal);
+    chgPwd.addEventListener('click', pwdModal);
+    lgOut.addEventListener('click', lgOutModal);
+}
+
+function sendAcct(){
+    //sends the data for update
+}
+
+function sendPwd(){
+    //sends the data for password change
+}
+
+function sendDltAcct(){
+    //sends the request to delte the account
+}
+
+function pwdModal(){
+    //opens the password modal
+    var acctModal = document.getElementsByClassName('modal')[2],
+        modal = document.getElementsByClassName('modal')[3],
+        deleteBtn = document.getElementsByClassName('delete')[3],
+        bkg = document.getElementsByClassName('modal-background')[3],
+        submit = document.getElementById('submit-PwdChg');
+    modal.classList.add('is-active');
+    acctModal.classList.remove('is-active');
+    deleteBtn.addEventListener("click", function(){
+        modal.classList.remove('is-active');
+    });
+    bkg.addEventListener('click', function(){
+        modal.classList.remove('is-active');
+    });
+    submit.addEventListener("click", sendPwd);
+}
+
+function deleteAcctModal(){
+    //opens the delete account modal
+    var modal = document.getElementsByClassName('modal')[5],
+        deleteBtn = document.getElementsByClassName('delete')[5],
+        deleteAcct = document.getElementById('delete-accnt'),
+        bkg = document.getElementsByClassName('modal-background')[5];
+    modal.classList.add('is-active');
+    deleteBtn.addEventListener('click', function(){
+        modal.classList.remove('is-active');
+    });
+    bkg.addEventListener("click", function(){
+        modal.classList.remove('is-active');
+    });
+    deleteAcct.addEventListener("click", sendDltAcct);
+}
+
+function lgOutModal(){
+    //opens log out modal
+    var acctModal = document.getElementsByClassName('modal')[2],
+        modal = document.getElementsByClassName('modal')[4],
+        bkg = document.getElementsByClassName('modal-background')[4],
+        deleteBtn = document.getElementsByClassName('delete')[4];
+    acctModal.classList.remove('is-active');
+    modal.classList.add('is-active');
+    bkg.addEventListener('click', function(){
+        modal.classList.remove('is-active');
+    });
+    deleteBtn.addEventListener("click", function(){
+        modal.classList.remove('is-active');
+    });
 }
 
 function updateList(LID) {
