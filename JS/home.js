@@ -352,6 +352,20 @@ function accountInfo(){
 
 function sendAcct(){
     //sends the data for update
+    var acctForm = document.getElementsByName("Account")[0],
+        formData = new FormData(acctForm),
+        xhp = new XMLHttpRequest(),
+        arry = [],
+        i = 0,
+        jsonData = {table: "Users", action: "update"};
+    for (var iter of formData.entries()){
+        if(iter[1] !== ""){
+            arry[i] = {target: iter[0]};
+            arry[i][iter[0]] = iter[1];
+        }
+        i++;
+    }
+    console.log(arry);
 }
 
 function sendPwd(){
@@ -418,4 +432,15 @@ function updateList(LID) {
 
 function updateTask(TID) {
 	//opens the task update modal
+}
+
+function concatJSON(in1, in2){
+    var out = {};
+    for(var key in in1){
+        out[key] = in1[key];
+    }
+    for(var key in in2){
+        out[key] = in2[key];
+    }
+    return out;
 }
