@@ -362,14 +362,26 @@ function sendAcct(){
         if(iter[1] !== ""){
             arry[i] = {target: iter[0]};
             arry[i][iter[0]] = iter[1];
+            arry[i] = concatJSON(jsonData, arry[i]);
         }
         i++;
     }
-    console.log(arry);
+    xhp.onreadystatechange = function(){
+        if(xhp.readyState == 4 && xhp.status == 200){
+            console.log("success")
+        }
+    }
+    arry.forEach(function(element){
+        xhp.open("GET", "PHP/home.php?q=" + JSON.stringify(element), true);
+        xhp.send();
+    });
 }
 
 function sendPwd(){
     //sends the data for password change
+    var pwdForm = document.getElementsByName("Password")[0],
+        formData = new FormData(pwdForm),
+        xhp = new XMLHttpRequest();
 }
 
 function sendDltAcct(){
