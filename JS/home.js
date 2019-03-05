@@ -353,28 +353,21 @@ function accountInfo(){
 function sendAcct(){
     //sends the data for update
     var acctForm = document.getElementsByName("Account")[0],
-        formData = new FormData(acctForm),
+        fformData = new FormData(acctForm),
         xhp = new XMLHttpRequest(),
         arry = [],
         i = 0,
         jsonData = {table: "Users", action: "update"};
-    for (var iter of formData.entries()){
+    for (var iter of fformData.entries()){
         if(iter[1] !== ""){
             arry[i] = {target: iter[0]};
             arry[i][iter[0]] = iter[1];
             arry[i] = concatJSON(jsonData, arry[i]);
-        }
-        i++;
-    }
-    xhp.onreadystatechange = function(){
-        if(xhp.readyState == 4 && xhp.status == 200){
-            console.log("success")
+            i++;
         }
     }
-    arry.forEach(function(element){
-        xhp.open("GET", "PHP/home.php?q=" + JSON.stringify(element), true);
-        xhp.send();
-    });
+    console.log(arry);
+    ajaxOne(arry, xhp, ajaxTwo);
 }
 
 function sendPwd(){
@@ -382,6 +375,13 @@ function sendPwd(){
     var pwdForm = document.getElementsByName("Password")[0],
         formData = new FormData(pwdForm),
         xhp = new XMLHttpRequest();
+        xhp.onreadystatechange = function(){
+            if(xhp.readyState == 4 && xhp.status == 200){
+                console.log(xhp.response);
+            }
+        };
+        xhp.open("POST", "PHP/home.php");
+        xhp.send(formData);
 }
 
 function sendDltAcct(){
@@ -455,4 +455,36 @@ function concatJSON(in1, in2){
         out[key] = in2[key];
     }
     return out;
+}
+
+function ajaxOne(data, xhp, callback){
+    xhp.onreadystatechange = function(){
+        if(xhp.readyState == 4 && xhp.status == 200){
+            console.log(xhp.response);
+            callback(data, xhp, ajaxThree);
+        }
+    }
+    xhp.open("GET", "PHP/home.php?q=" + JSON.stringify(data[0]));
+    xhp.send();
+}
+
+function ajaxTwo(data, xhp, anotherCallback){
+    xhp.onreadystatechange = function(){
+        if(xhp.readyState == 4 && xhp.status == 200){
+            console.log(xhp.response);
+            anotherCallback(data, xhp);
+        }
+    }
+    xhp.open("GET", "PHP/home.php?q=" + JSON.stringify(data[1]));
+    xhp.send();
+}
+
+function ajaxThree(data, xhp){
+    xhp.onreadystatechange = function(){
+        if(xhp.readyState == 4 && xhp.status == 200){
+            console.log(xhp.response);
+        }
+    }
+    xhp.open("GET", "PHP/home.php?q=" + JSON.stringify(data[2]));
+    xhp.send();
 }

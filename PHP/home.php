@@ -41,9 +41,9 @@ else{
 		while($row = $results->fetch_assoc()){
 			$output[] = $row;
 		}
-		echo json_encode($output);
 		$results->free();
 		$conn->close();
+		echo json_encode($output);
 	}
 
 	if($request['table'] == "Tasks" && $request['action'] == "get"){
@@ -90,7 +90,7 @@ else{
 			$sql = "UPDATE Users SET username=".$request["username"]." WHERE UID=".$_SESSION["UID"];
 			if($conn->query($sql)){
 				$conn->close();
-				echo "success";
+				echo "success".$request["username"].$request['target'];
 			}
 			else {
 				$conn->close();
@@ -98,36 +98,36 @@ else{
 			}
 		}
 		if($request['target'] == 'fName'){
-			$sql = "UPDATE Users SET fName=".$request["fName"]." WHERE UID=".$_SESSION["UID"];
-			if($conn->query($sql)){
+			$sql = "UPDATE Users SET fName='".$request["fName"]."' WHERE UID='".$_SESSION["UID"]."'";
+			if($conn->query($sql) === TRUE){
 				$conn->close();
-				echo "success";
+				echo "success ".$request["fName"];
 			}
 			else {
+				echo "sorry try again.".$conn->error;
 				$conn->close();
-				echo "sorry try again.";
 			}
 		}
 		if($request['target'] == 'mName'){
-			$sql = "UPDATE Users SET mName=".$request["mName"]." WHERE UID=".$_SESSION["UID"];
+			$sql = "UPDATE Users SET mName='".$request["mName"]."' WHERE UID=".$_SESSION["UID"];
 			if($conn->query($sql)){
 				$conn->close();
 				echo "success";
 			}
 			else {
+				echo "sorry try again.".$conn->error;
 				$conn->close();
-				echo "sorry try again.";
 			}
 		}
 		if($request['target'] == 'lName'){
-			$sql = "UPDATE Users SET lName=".$request["lName"]." WHERE UID=".$_SESSION["UID"];
+			$sql = "UPDATE Users SET lName='".$request["lName"]."' WHERE UID='".$_SESSION["UID"]."'";
 			if($conn->query($sql)){
 				$conn->close();
 				echo "success";
 			}
 			else {
+				echo "sorry try again.".$conn->error;
 				$conn->close();
-				echo "sorry try again.";
 			}
 		}
 		
