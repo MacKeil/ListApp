@@ -253,6 +253,76 @@
 			</div>
 			<div class="modal-close"></div>
 		</div>
+		<div class="modal">
+			<!--Task update Modal-->
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Update Task</p>
+					<button class="delete"></button>
+				</header>
+				<section class="modal-card-body">
+					<form action="" method="post" name="Task">
+						<div class="field">
+							<div class="control has-icons-left">
+								<input class="input is-large" type="text" name="TaskName" placeholder="Task Name"/>
+								<span class="icon is-large is-left">
+									<i class="fas fa-list"></i>
+								</span>
+							</div>
+						</div>
+                        <div class="field">
+                            <div class="control has-icons-left">
+                                <textarea class="textarea" placeholder="Details" name="Details"></textarea>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox">
+                                    <input class="checkbox" name="Complete" type="checkbox"/>
+                                    Already Done?
+                                </label>
+                            </div>
+                        </div>
+					</form>
+				</section>
+				<footer class="modal-card-foot">
+					<button id="submit-task" class="button is-success">Create Task</button>
+					<button class="button">Nevermind</button>
+				</footer>
+			</div>
+		</div>
+		<div class="modal">
+			<!--List update Modal-->
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title">Update List</p>
+					<button class="delete"></button>
+				</header>
+				<section class="modal-card-body">
+					<form action="" method="post" name="Task">
+						<div class="field">
+							<div class="control has-icons-left">
+								<input class="input is-large" type="text" name="ListName" placeholder="List Name"/>
+								<span class="icon is-large is-left">
+									<i class="fas fa-list"></i>
+								</span>
+							</div>
+						</div>
+                        <div class="field">
+                            <div class="control has-icons-left">
+                                <textarea class="textarea" placeholder="Details" name="Details"></textarea>
+                            </div>
+                        </div>
+					</form>
+				</section>
+				<footer class="modal-card-foot">
+					<button id="submit-task" class="button is-success">Update List</button>
+					<button class="button">Nevermind</button>
+				</footer>
+			</div>
+		</div>
 		<footer class="footer">
 			<div class="content has-text-centered">
 				<p>

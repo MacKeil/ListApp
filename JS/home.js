@@ -75,9 +75,15 @@ function openList(LID) {
        backBtn = document.createElement("a"),
        bBIconSP = document.createElement("span"),
        bBIcon = document.createElement("i"),
+       editBtn = document.createElement("a"),
+       eBIconSP = document.createElement("span"),
+       eBIcon = document.createElement("i"),
        addBtn = document.getElementsByClassName("add-btn");
    bBIconSP.classList.add("icon");
+   eBIconSP.classList.add("icon");
+   eBIcon.classList.add("fas", "fa-ellipsis-v");
    bBIcon.classList.add("fas", "fa-arrow-left");
+   eBIconSP.appendChild(eBIcon);
    bBIconSP.appendChild(bBIcon);
    btns[0].onclick = function () {createTask(LID)};
    btns[2].onclick = function () {createTask(LID)};
@@ -87,7 +93,11 @@ function openList(LID) {
 	backBtn.onclick = closeList;
    backBtn.id = 'backBtn';
    backBtn.appendChild(bBIconSP);
+   editBtn.onclick = function(LID){updateList(LID);};
+   editBtn.id = 'editbtn' + LID;
+   editBtn.appendChild(eBIconSP);
    panelTitle[0].insertAdjacentElement("afterBegin", backBtn);
+   panelTitle[0].insertAdjacentElement("beforeend", editBtn);
 	for (var i = 0; i < otherLists.length; i++) {
 		otherLists[i].classList.add("hide");
 	}
@@ -144,9 +154,12 @@ function taskGen(TID, taskName, taskDetails, isComplete) {
         details,
         columnLeft,
         columnRight,
+        editBtn,
+        eBIconSP,
+        eBIcon,
         taskBtn;
     nodeHolder = document.createElement("div");
-    nodeHolder.id = TID;            
+    nodeHolder.id = "Task" + TID;            
     nodeHolder.classList.add("panel-block", "panel-color", "find-me");
     columnDiv = document.createElement("div");
     columnDiv.classList.add("column", "is-6");
@@ -156,6 +169,16 @@ function taskGen(TID, taskName, taskDetails, isComplete) {
     columnRight.classList.add("is-pulled-right");
     taskBtn = document.createElement("button");
     taskBtn.id = TID + "btn";
+    editBtn = document.createElement("a");
+    eBIconSP = document.createElement("span");
+    eBIcon = document.createElement("i");
+    eBIconSP.classList.add("icon");
+    eBIcon.classList.add("fas", "fa-ellipsis-v");
+    eBIconSP.appendChild(eBIcon);
+    editBtn.onclick = function(LID){updateTask(TID);};
+    editBtn.id = 'editbtn' + TID;
+    editBtn.appendChild(eBIconSP);
+    nodeHolder.appendChild(editBtn);
     if(isComplete == 0){
         taskBtn.classList.add("button", "is-success");
         taskBtn.appendChild(document.createTextNode("Completed"));
@@ -439,12 +462,28 @@ function lgOutModal(){
 }
 
 function updateList(LID) {
-	//opens the list update modal
+    //opens the list update modal
+    var upListModal = document.getElementsByClassName('modal')[7],
+        bkg = document.getElementsByClassName('modal-background')[7],
+        dltBtn = document.getElementsByClassName('delete')[7];
+    upListModal.classList.add('is-active');
+    bkg.addEventListener('click', function(){
+        upListModal.classList.remove('is-active');
+    });
+    dltBtn.addEventListener('click', function(){
+        upListModal.classList.remove('is-active');
+    });
+    
 }
 
 function updateTask(TID) {
-	//opens the task update modal
+    //opens the task update modal
+    var upTaskModal = document.getElementsByClassName('modal')[6],
+        bkg = document.getElementsByClassName('modal-background')[6],
+        dltBtn = document.getElementsByClassName('delete')[6];
+    upTaskModal.classList.add('is-active');
 }
+
 
 function concatJSON(in1, in2){
     var out = {};
@@ -487,4 +526,21 @@ function ajaxThree(data, xhp){
     }
     xhp.open("GET", "PHP/home.php?q=" + JSON.stringify(data[2]));
     xhp.send();
+}
+
+function autoFill(dataToUse){
+    dataToUse = dataToUse || {};
+    if(dataToUse = {}){
+        console.log("No data to prefill with");
+        return;
+    }
+    var myData = Object.entries(dataToUse);
+    for(var i = 0; i < myData.length; i++){
+        document.getElementsByName(myData[i][0])[0].value = myData[i][1];
+    }
+}
+
+function getPrefillList(ID){
+    var nodes = document.getElementById(ID).children[0].children[0].childNodes;
+    var output = {ListName : nodes[0].textContent, }
 }
