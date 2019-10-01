@@ -1,0 +1,14 @@
+{
+	"name": "MacKeil/ListApp",
+	"description":"A simple list making WebAPP",
+	"authors":[
+		{
+			"name":"Zachary MacKeil",
+			"email":"zack.mackeil@gmail.com"
+		}
+	],
+	"minimum-stability": "dev",
+	"require":{
+		"php": ">=7"
+	}
+}
